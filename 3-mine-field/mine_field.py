@@ -5,7 +5,6 @@ class MineField:
         self.mines = {(r, c) for c in range(cols) for r in range(rows) if grid[r][c]}
 
     def hint(self):
-        hint_grid = ""
         rows, cols = self.size
         return "\n".join(''.join('*' if (r, c) in self.mines else self.count_neighbours(r, c) for c in range(cols)) for r in range(rows))
 
