@@ -39,10 +39,7 @@ class Number:
             number += ' '.join(decimals)
             return number
 
-        neg = ''
-        if int(self.n) < 0:
-            neg = 'negative '
-            self.n = self.n[1:]
+        neg = '' if int(self.n) > 0 else self.negative()
 
         triples = self.three_split()
 
@@ -60,6 +57,10 @@ class Number:
                 return neg + ', '.join(number_strings)
             return neg + ', '.join(number_strings[:-1]) + ' and ' + number_strings[-1]
         return neg + number_strings[0]
+
+    def negative(self):
+        self.n = self.n[1:]
+        return 'negative '
 
     def three_split(self):
         self.zero_prepend()
