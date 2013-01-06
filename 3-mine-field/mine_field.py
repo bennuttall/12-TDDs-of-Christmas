@@ -2,7 +2,7 @@ class MineField:
     def __init__(self, size, grid):
         self.size = size
         rows, cols = size
-        self.mines = {(r, c) for c in range(cols) for c in range(cols) for r in range(rows) if grid[r][c]}
+        self.mines = {(r, c) for c in range(cols) for r in range(rows) if grid[r][c]}
 
     def hint(self):
         hint_grid = ""
