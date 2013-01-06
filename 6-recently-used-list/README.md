@@ -1,4 +1,4 @@
-# Recently-Used List
+# 6. Recently-Used List
 
 Develop a recently-used-list class to hold strings uniquely in Last-In-First-Out order.
 

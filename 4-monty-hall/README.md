@@ -1,4 +1,4 @@
-# Monty Hall
+# 4. Monty Hall
 
 Suppose you’re on a game show and you’re given the choice of three doors. Behind one door is a car; behind the others, goats. The car and the goats were placed randomly behind the doors before the show.
 
