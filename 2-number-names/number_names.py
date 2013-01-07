@@ -20,6 +20,7 @@ class Number:
                 '1': 'ten',
                 '2': 'twenty',
                 '3': 'thirty',
+                '4': 'forty',
                 '5': 'fifty'
                 }
         for i in range(1, 10):
