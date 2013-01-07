@@ -9,7 +9,8 @@ class Number:
                 '1': 'eleven',
                 '2': 'twelve',
                 '3': 'thirteen',
-                '5': 'fifteen'
+                '5': 'fifteen',
+                '8': 'eighteen'
                 }
         for i in range(1, 10):
             if str(i) not in self.teens:
