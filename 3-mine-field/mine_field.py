@@ -1,14 +1,15 @@
 class MineField:
-    def __init__(self, size, grid):
-        self.size = size
-        rows, cols = size
+    def __init__(self, grid):
+        rows = len(grid)
+        cols = len(grid[0])
+        self.size = (rows, cols)
         self.mines = {(r, c) for c in range(cols) for r in range(rows) if grid[r][c]}
 
-    def hint(self):
+    def reveal(self):
         rows, cols = self.size
-        return "\n".join(''.join(self.square_hint(r, c) for c in range(cols)) for r in range(rows))
+        return "\n".join(''.join(self.reveal_square(r, c) for c in range(cols)) for r in range(rows))
 
-    def square_hint(self, r, c):
+    def reveal_square(self, r, c):
         return '*' if (r, c) in self.mines else self.count_neighbours(r, c)
 
     def count_neighbours(self, r, c):
