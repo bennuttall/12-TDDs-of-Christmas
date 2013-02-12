@@ -42,7 +42,7 @@ class Test(unittest.TestCase):
         hand_1 = PokerHand(cards)
         self.assertIsInstance(hand_1, PokerHand)
 
-    def test_can_only_create_hand_of_cards(self):
+    def test_can_only_create_hand_of_card_objects(self):
         with self.assertRaises(PokerHand.InvalidHandError):
             hand_1 = PokerHand('AH')
 
@@ -55,14 +55,26 @@ class Test(unittest.TestCase):
         card_3 = Card(value='Q', suit='D')
         card_4 = Card(value='K', suit='S')
         card_5 = 'AS'
+
         cards = (card_1, card_2, card_3, card_4, card_5)
         with self.assertRaises(PokerHand.InvalidHandError):
-            hand_2 = PokerHand(cards)
+            hand_3 = PokerHand(cards)
+
+    def test_cannot_have_duplicate_cards_in_deck(self):
+        card_1 = Card(value='2', suit='H')
+        card_2 = Card(value='3', suit='C')
+        card_3 = Card(value='Q', suit='D')
+        card_4 = Card(value='K', suit='S')
+        card_5 = Card(value='3', suit='C')
+        cards = (card_1, card_2, card_3, card_4, card_5)
+
+        with self.assertRaises(PokerHand.InvalidHandError):
+            hand_1 = PokerHand(cards)
 
     def test_can_show_card(self):
         card_1 = Card(value='A', suit='S')
         expected_card = 'AS'
-        self.assertEqual(card_1.show(), expected_card)
+        self.assertEqual(repr(card_1), expected_card)
 
     def test_poker_hand_can_show_hand(self):
         card_1 = Card(value='A', suit='S')

@@ -1,6 +1,10 @@
 class PokerHand:
     def __init__(self, cards):
-        if any(isinstance(card, Card) == False for card in cards):
+        invalid_cards = any(isinstance(card, Card) == False for card in cards)
+        card_set = {repr(card) for card in cards}
+        duplicate_cards = len(card_set) < len(cards)
+
+        if invalid_cards or duplicate_cards:
             raise PokerHand.InvalidHandError
         self.cards = cards
 
