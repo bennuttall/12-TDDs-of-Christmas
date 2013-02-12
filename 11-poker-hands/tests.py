@@ -151,6 +151,19 @@ class Test(unittest.TestCase):
         expected_rank_2 = ('High Card', 'K')
         self.assertEqual(actual_rank_2, expected_rank_2)
 
+    def test_can_determine_pair_from_deck(self):
+        card_1 = Card(value='A', suit='S')
+        card_2 = Card(value='2', suit='H')
+        card_3 = Card(value='4', suit='C')
+        card_4 = Card(value='2', suit='D')
+        card_5 = Card(value='7', suit='S')
+
+        cards = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards)
+        actual_rank_1 = hand_1.rank()
+        expected_rank_1 = ('Pair', '2')
+        self.assertEqual(actual_rank_1, expected_rank_1)
+
 
 if __name__ == '__main__':
     unittest.main()

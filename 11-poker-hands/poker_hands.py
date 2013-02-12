@@ -1,3 +1,6 @@
+from itertools import combinations
+
+
 class PokerHand:
     def __init__(self, cards):
         invalid_cards = any(isinstance(card, Card) == False for card in cards)
@@ -12,10 +15,23 @@ class PokerHand:
         return tuple(card.show() for card in self.cards)
 
     def rank(self):
+        card_value_set = {card.value for card in self.cards}
+        has_repeats = len(card_value_set) < 5
+        if has_repeats:
+            return self.pair()
+        return self.high_card()
+
+    def high_card(self):
         hand_type = 'High Card'
         self.sort_cards_by_value()
         high_card = self.cards[0]
         return (hand_type, high_card.value)
+
+    def pair(self):
+        hand_type = 'Pair'
+        card_values = [card.value for card in self.cards]
+        pair_value = [a for (a, b) in combinations(card_values, 2) if a == b]
+        return (hand_type, pair_value[0])
 
     def sort_cards_by_value(self):
         self.cards = sorted(self.cards, key=lambda card: card.value_index)
