@@ -71,7 +71,7 @@ class Test(unittest.TestCase):
         with self.assertRaises(PokerHand.InvalidHandError):
             hand = PokerHand(cards)
 
-    def test_poker_hand_must_be_five_cards(self):
+    def test_poker_hand_must_be_exactly_five_cards(self):
         card_1 = Card(value='2', suit='H')
         card_2 = Card(value='3', suit='C')
         card_3 = Card(value='Q', suit='D')
