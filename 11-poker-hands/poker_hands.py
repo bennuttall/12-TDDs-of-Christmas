@@ -4,7 +4,7 @@ class PokerHand:
         card_set = {repr(card) for card in cards}
         duplicate_cards = len(card_set) < len(cards)
 
-        if invalid_cards or duplicate_cards:
+        if invalid_cards or duplicate_cards or len(cards) != 5:
             raise PokerHand.InvalidHandError
         self.cards = cards
 
