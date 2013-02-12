@@ -69,7 +69,29 @@ class Test(unittest.TestCase):
         cards = (card_1, card_2, card_3, card_4, card_5)
 
         with self.assertRaises(PokerHand.InvalidHandError):
-            hand_1 = PokerHand(cards)
+            hand = PokerHand(cards)
+
+    def test_cannot_have_duplicate_cards_in_deck(self):
+        card_1 = Card(value='2', suit='H')
+        card_2 = Card(value='3', suit='C')
+        card_3 = Card(value='Q', suit='D')
+        card_4 = Card(value='K', suit='S')
+        card_5 = Card(value='T', suit='C')
+        card_6 = Card(value='A', suit='H')
+        cards_1 = (card_1,)
+
+        with self.assertRaises(PokerHand.InvalidHandError):
+            hand_1 = PokerHand(cards_1)
+
+        cards_2 = (card_1, card_2, card_3, card_4)
+
+        with self.assertRaises(PokerHand.InvalidHandError):
+            hand_2 = PokerHand(cards_2)
+
+        cards_3 = (card_1, card_2, card_3, card_4, card_5, card_6)
+
+        with self.assertRaises(PokerHand.InvalidHandError):
+            hand_3 = PokerHand(cards_3)
 
     def test_can_show_card(self):
         card_1 = Card(value='A', suit='S')
