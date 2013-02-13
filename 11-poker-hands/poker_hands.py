@@ -19,11 +19,12 @@ class PokerHand:
         unique_cards = len(card_value_set)
         if unique_cards < 5:
             return self.pairs()
-        return self.high_card()
+        straight = self.straight()
+        return straight if straight else self.high_card()
 
     def high_card(self):
-        hand_type = 'High Card'
         self.sort_cards_by_value()
+        hand_type = 'High Card'
         high_card = self.cards[0]
         return (hand_type, high_card.value)
 
@@ -44,6 +45,13 @@ class PokerHand:
         card_values = [card.value for card in self.cards]
         n = card_values.count(repeated_value)
         return (hand_types[n], repeated_value)
+
+    def straight(self):
+        self.sort_cards_by_value()
+        min_card, min_value_index = self.cards[4], self.cards[4].value_index
+        max_card, max_value_index = self.cards[0], self.cards[0].value_index
+        if min_value_index == max_value_index + 4:
+            return ('Straight', max_card.value)
 
     def sort_cards_by_value(self):
         self.cards = sorted(self.cards, key=lambda card: card.value_index)

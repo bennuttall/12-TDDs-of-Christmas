@@ -251,5 +251,19 @@ class Test(unittest.TestCase):
         expected_rank_2 = ('Three of a Kind', 'K')
         self.assertEqual(actual_rank_2, expected_rank_2)
 
+    def test_can_determine_straight_from_hand(self):
+        card_1 = Card(value='2', suit='D')
+        card_2 = Card(value='3', suit='H')
+        card_3 = Card(value='4', suit='H')
+        card_4 = Card(value='5', suit='C')
+        card_5 = Card(value='6', suit='C')
+
+        cards_1 = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards_1)
+        actual_rank_1 = hand_1.rank()
+        expected_rank_1 = ('Straight', '6')
+        self.assertEqual(actual_rank_1, expected_rank_1)
+
+
 if __name__ == '__main__':
     unittest.main()
