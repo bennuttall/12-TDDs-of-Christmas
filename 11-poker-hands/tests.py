@@ -158,12 +158,48 @@ class Test(unittest.TestCase):
         card_4 = Card(value='2', suit='D')
         card_5 = Card(value='7', suit='S')
 
-        cards = (card_1, card_2, card_3, card_4, card_5)
-        hand_1 = PokerHand(cards)
+        cards_1 = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards_1)
         actual_rank_1 = hand_1.rank()
         expected_rank_1 = ('Pair', '2')
         self.assertEqual(actual_rank_1, expected_rank_1)
 
+        card_6 = Card(value='T', suit='C')
+        card_7 = Card(value='3', suit='C')
+        card_8 = Card(value='8', suit='H')
+        card_9 = Card(value='T', suit='H')
+        card_10 = Card(value='K', suit='D')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+        actual_rank_2 = hand_2.rank()
+        expected_rank_2 = ('Pair', 'T')
+        self.assertEqual(actual_rank_2, expected_rank_2)
+
+    def test_can_determine_two_pair_from_deck(self):
+        card_1 = Card(value='A', suit='S')
+        card_2 = Card(value='A', suit='H')
+        card_3 = Card(value='4', suit='C')
+        card_4 = Card(value='4', suit='D')
+        card_5 = Card(value='7', suit='S')
+
+        cards_1 = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards_1)
+        actual_rank_1 = hand_1.rank()
+        expected_rank_1 = ('Two Pair', ('A', '4'))
+        self.assertEqual(actual_rank_1, expected_rank_1)
+
+        card_6 = Card(value='7', suit='H')
+        card_7 = Card(value='J', suit='S')
+        card_8 = Card(value='7', suit='C')
+        card_9 = Card(value='T', suit='D')
+        card_10 = Card(value='J', suit='C')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+        actual_rank_2 = hand_2.rank()
+        expected_rank_2 = ('Two Pair', ('7', 'J'))
+        self.assertEqual(actual_rank_2, expected_rank_2)
 
 if __name__ == '__main__':
     unittest.main()

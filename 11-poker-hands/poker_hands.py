@@ -16,9 +16,9 @@ class PokerHand:
 
     def rank(self):
         card_value_set = {card.value for card in self.cards}
-        has_repeats = len(card_value_set) < 5
-        if has_repeats:
-            return self.pair()
+        unique_cards = len(card_value_set)
+        if unique_cards < 5:
+            return self.pairs()
         return self.high_card()
 
     def high_card(self):
@@ -27,11 +27,12 @@ class PokerHand:
         high_card = self.cards[0]
         return (hand_type, high_card.value)
 
-    def pair(self):
-        hand_type = 'Pair'
+    def pairs(self):
         card_values = [card.value for card in self.cards]
-        pair_value = [a for (a, b) in combinations(card_values, 2) if a == b]
-        return (hand_type, pair_value[0])
+        pair_values = [a for (a, b) in combinations(card_values, 2) if a == b]
+        if len(pair_values) == 2:
+            return ('Two Pair', tuple(pair_values))
+        return ('Pair', pair_values[0])
 
     def sort_cards_by_value(self):
         self.cards = sorted(self.cards, key=lambda card: card.value_index)
