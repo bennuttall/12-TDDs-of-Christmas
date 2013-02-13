@@ -33,10 +33,17 @@ class PokerHand:
         if len(repeated_values) == 2:
             return ('Two Pair', tuple(repeated_values))
         repeated_value = repeated_values[0]
+        return self.which_n_of_a_kind(repeated_value)
+
+    def which_n_of_a_kind(self, repeated_value):
+        hand_types = {
+                      2: 'Pair',
+                      3: 'Three of a Kind',
+                      4: 'Four of a Kind'
+                    }
         card_values = [card.value for card in self.cards]
-        if card_values.count(repeated_value) == 3:
-            return ('Three of a Kind', repeated_value)
-        return ('Pair', repeated_value)
+        n = card_values.count(repeated_value)
+        return (hand_types[n], repeated_value)
 
     def sort_cards_by_value(self):
         self.cards = sorted(self.cards, key=lambda card: card.value_index)
