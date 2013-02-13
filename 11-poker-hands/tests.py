@@ -239,5 +239,17 @@ class Test(unittest.TestCase):
         expected_rank_1 = ('Four of a Kind', '3')
         self.assertEqual(actual_rank_1, expected_rank_1)
 
+        card_6 = Card(value='K', suit='H')
+        card_7 = Card(value='K', suit='C')
+        card_8 = Card(value='K', suit='S')
+        card_9 = Card(value='2', suit='S')
+        card_10 = Card(value='4', suit='D')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+        actual_rank_2 = hand_2.rank()
+        expected_rank_2 = ('Three of a Kind', 'K')
+        self.assertEqual(actual_rank_2, expected_rank_2)
+
 if __name__ == '__main__':
     unittest.main()
