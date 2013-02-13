@@ -201,5 +201,30 @@ class Test(unittest.TestCase):
         expected_rank_2 = ('Two Pair', ('7', 'J'))
         self.assertEqual(actual_rank_2, expected_rank_2)
 
+    def test_can_determine_three_of_a_kind_from_deck(self):
+        card_1 = Card(value='2', suit='C')
+        card_2 = Card(value='2', suit='H')
+        card_3 = Card(value='9', suit='S')
+        card_4 = Card(value='2', suit='S')
+        card_5 = Card(value='Q', suit='D')
+
+        cards_1 = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards_1)
+        actual_rank_1 = hand_1.rank()
+        expected_rank_1 = ('Three of a Kind', '2')
+        self.assertEqual(actual_rank_1, expected_rank_1)
+
+        card_6 = Card(value='A', suit='S')
+        card_7 = Card(value='7', suit='C')
+        card_8 = Card(value='7', suit='H')
+        card_9 = Card(value='7', suit='D')
+        card_10 = Card(value='Q', suit='C')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+        actual_rank_2 = hand_2.rank()
+        expected_rank_2 = ('Three of a Kind', '7')
+        self.assertEqual(actual_rank_2, expected_rank_2)
+
 if __name__ == '__main__':
     unittest.main()

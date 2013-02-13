@@ -29,10 +29,14 @@ class PokerHand:
 
     def pairs(self):
         card_values = [card.value for card in self.cards]
-        pair_values = [a for (a, b) in combinations(card_values, 2) if a == b]
-        if len(pair_values) == 2:
-            return ('Two Pair', tuple(pair_values))
-        return ('Pair', pair_values[0])
+        repeated_values = [a for (a, b) in combinations(card_values, 2) if a == b]
+        if len(repeated_values) == 2:
+            return ('Two Pair', tuple(repeated_values))
+        repeated_value = repeated_values[0]
+        card_values = [card.value for card in self.cards]
+        if card_values.count(repeated_value) == 3:
+            return ('Three of a Kind', repeated_value)
+        return ('Pair', repeated_value)
 
     def sort_cards_by_value(self):
         self.cards = sorted(self.cards, key=lambda card: card.value_index)
