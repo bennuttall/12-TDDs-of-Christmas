@@ -126,7 +126,7 @@ class Test(unittest.TestCase):
         expected_index_3 = 3
         self.assertEqual(value_index_3, expected_index_3)
 
-    def test_can_determine_high_card_from_deck(self):
+    def test_can_determine_high_card_from_hand(self):
         card_1 = Card(value='A', suit='S')
         card_2 = Card(value='2', suit='H')
         card_3 = Card(value='4', suit='C')
@@ -151,7 +151,7 @@ class Test(unittest.TestCase):
         expected_rank_2 = ('High Card', 'K')
         self.assertEqual(actual_rank_2, expected_rank_2)
 
-    def test_can_determine_pair_from_deck(self):
+    def test_can_determine_pair_from_hand(self):
         card_1 = Card(value='A', suit='S')
         card_2 = Card(value='2', suit='H')
         card_3 = Card(value='4', suit='C')
@@ -176,7 +176,7 @@ class Test(unittest.TestCase):
         expected_rank_2 = ('Pair', 'T')
         self.assertEqual(actual_rank_2, expected_rank_2)
 
-    def test_can_determine_two_pair_from_deck(self):
+    def test_can_determine_two_pair_from_hand(self):
         card_1 = Card(value='A', suit='S')
         card_2 = Card(value='A', suit='H')
         card_3 = Card(value='4', suit='C')
@@ -201,7 +201,7 @@ class Test(unittest.TestCase):
         expected_rank_2 = ('Two Pair', ('7', 'J'))
         self.assertEqual(actual_rank_2, expected_rank_2)
 
-    def test_can_determine_three_of_a_kind_from_deck(self):
+    def test_can_determine_three_of_a_kind_from_hand(self):
         card_1 = Card(value='2', suit='C')
         card_2 = Card(value='2', suit='H')
         card_3 = Card(value='9', suit='S')
@@ -226,7 +226,7 @@ class Test(unittest.TestCase):
         expected_rank_2 = ('Three of a Kind', '7')
         self.assertEqual(actual_rank_2, expected_rank_2)
 
-    def test_can_determine_four_of_a_kind_from_deck(self):
+    def test_can_determine_four_of_a_kind_from_hand(self):
         card_1 = Card(value='3', suit='C')
         card_2 = Card(value='3', suit='H')
         card_3 = Card(value='3', suit='D')
