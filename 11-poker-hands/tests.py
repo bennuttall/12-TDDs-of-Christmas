@@ -1,4 +1,4 @@
-from poker_hands import PokerHand, Card
+from poker_hands import Card, PokerHand, PokerGame
 import unittest
 
 
@@ -353,6 +353,28 @@ class Test(unittest.TestCase):
         actual_rank_2 = hand_2.rank()
         expected_rank_2 = ('Straight Flush', 'A')
         self.assertEqual(actual_rank_2, expected_rank_2)
+
+    def test_can_create_poker_game(self):
+        card_1 = Card(value='2', suit='S')
+        card_2 = Card(value='3', suit='H')
+        card_3 = Card(value='6', suit='C')
+        card_4 = Card(value='7', suit='D')
+        card_5 = Card(value='9', suit='S')
+
+        cards = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards)
+
+        card_6 = Card(value='3', suit='H')
+        card_7 = Card(value='4', suit='C')
+        card_8 = Card(value='5', suit='D')
+        card_9 = Card(value='9', suit='D')
+        card_10 = Card(value='T', suit='S')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+
+        game_1 = PokerGame(hand_1, hand_2)
+        self.assertIsInstance(game_1, PokerGame)
 
 
 if __name__ == '__main__':
