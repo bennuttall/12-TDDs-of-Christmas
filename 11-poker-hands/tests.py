@@ -304,6 +304,31 @@ class Test(unittest.TestCase):
         expected_rank_2 = ('Flush', 'J')
         self.assertEqual(actual_rank_2, expected_rank_2)
 
+    def test_can_determine_full_house_from_hand(self):
+        card_1 = Card(value='3', suit='D')
+        card_2 = Card(value='3', suit='H')
+        card_3 = Card(value='7', suit='H')
+        card_4 = Card(value='7', suit='S')
+        card_5 = Card(value='7', suit='C')
+
+        cards_1 = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards_1)
+        actual_rank_1 = hand_1.rank()
+        expected_rank_1 = ('Full House', '7')
+        self.assertEqual(actual_rank_1, expected_rank_1)
+
+        card_6 = Card(value='K', suit='S')
+        card_7 = Card(value='4', suit='H')
+        card_8 = Card(value='K', suit='C')
+        card_9 = Card(value='4', suit='D')
+        card_10 = Card(value='4', suit='S')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+        actual_rank_2 = hand_2.rank()
+        expected_rank_2 = ('Full House', '4')
+        self.assertEqual(actual_rank_2, expected_rank_2)
+
 
 if __name__ == '__main__':
     unittest.main()

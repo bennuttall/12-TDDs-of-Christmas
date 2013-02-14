@@ -24,7 +24,8 @@ class PokerHand:
         card_value_set = {card.value for card in self.cards}
         unique_card_values = len(card_value_set)
         if unique_card_values < 5:
-            return self.pairs()
+            return self.repeats()
+
         straight = self.straight()
         return straight if straight else self.high_card()
 
@@ -35,7 +36,8 @@ class PokerHand:
 
     def pairs(self):
         card_values = [card.value for card in self.cards]
-        repeated_values = [a for (a, b) in combinations(card_values, 2) if a == b]
+        card_combinations = combinations(card_values, 2)
+        repeated_values = [a for (a, b) in card_combinations if a == b]
         if len(repeated_values) == 2:
             return ('Two Pair', tuple(repeated_values))
         repeated_value = repeated_values[0]
@@ -56,6 +58,25 @@ class PokerHand:
         max_card, max_value_index = self.cards[0], self.cards[0].value_index
         if min_value_index == max_value_index + 4:
             return ('Straight', max_card.value)
+
+    def full_house(self):
+        most_frequent_card = self.most_frequent_card()
+        return ('Full House', most_frequent_card.value)
+
+    def repeats(self):
+        card_value_set = {card.value for card in self.cards}
+        unique_card_values = len(card_value_set)
+        if unique_card_values == 2:
+            card_values = [card.value for card in self.cards]
+            if (card_values.count(list(card_value_set)[0]) == 3 and card_values.count(list(card_value_set)[1]) == 2) or (card_values.count(list(card_value_set)[0]) == 2 and card_values.count(list(card_value_set)[1]) == 3):
+                return self.full_house()
+        return self.pairs()
+
+    def most_frequent_card(self):
+        card_values = [card.value for card in self.cards]
+        most_common_value = max(set(card_values), key=card_values.count)
+        most_common_card = card_values.index(most_common_value)
+        return self.cards[most_common_card]
 
     def sort_cards_by_value(self, cards):
         return sorted(cards, key=lambda card: card.value_index)
