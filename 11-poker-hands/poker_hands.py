@@ -15,9 +15,15 @@ class PokerHand:
         return tuple(card.show() for card in self.cards)
 
     def rank(self):
+        card_suit_set = {card.suit for card in self.cards}
+        unique_card_suits = len(card_suit_set)
+        if unique_card_suits == 1:
+            highest_card = self.cards[0]
+            return ('Flush', highest_card.value)
+
         card_value_set = {card.value for card in self.cards}
-        unique_cards = len(card_value_set)
-        if unique_cards < 5:
+        unique_card_values = len(card_value_set)
+        if unique_card_values < 5:
             return self.pairs()
         straight = self.straight()
         return straight if straight else self.high_card()

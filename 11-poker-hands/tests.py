@@ -267,6 +267,43 @@ class Test(unittest.TestCase):
         expected_rank_1 = ('Straight', '6')
         self.assertEqual(actual_rank_1, expected_rank_1)
 
+        card_6 = Card(value='6', suit='H')
+        card_7 = Card(value='7', suit='H')
+        card_8 = Card(value='8', suit='C')
+        card_9 = Card(value='9', suit='D')
+        card_10 = Card(value='T', suit='S')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+        actual_rank_2 = hand_2.rank()
+        expected_rank_2 = ('Straight', 'T')
+        self.assertEqual(actual_rank_2, expected_rank_2)
+
+    def test_can_determine_flush_from_hand(self):
+        card_1 = Card(value='2', suit='D')
+        card_2 = Card(value='4', suit='D')
+        card_3 = Card(value='5', suit='D')
+        card_4 = Card(value='T', suit='D')
+        card_5 = Card(value='K', suit='D')
+
+        cards_1 = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards_1)
+        actual_rank_1 = hand_1.rank()
+        expected_rank_1 = ('Flush', 'K')
+        self.assertEqual(actual_rank_1, expected_rank_1)
+
+        card_6 = Card(value='3', suit='S')
+        card_7 = Card(value='4', suit='S')
+        card_8 = Card(value='7', suit='S')
+        card_9 = Card(value='T', suit='S')
+        card_10 = Card(value='J', suit='S')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+        actual_rank_2 = hand_2.rank()
+        expected_rank_2 = ('Flush', 'J')
+        self.assertEqual(actual_rank_2, expected_rank_2)
+
 
 if __name__ == '__main__':
     unittest.main()
