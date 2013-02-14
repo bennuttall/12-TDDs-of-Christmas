@@ -68,7 +68,11 @@ class PokerHand:
         unique_card_values = len(card_value_set)
         if unique_card_values == 2:
             card_values = [card.value for card in self.cards]
-            if (card_values.count(list(card_value_set)[0]) == 3 and card_values.count(list(card_value_set)[1]) == 2) or (card_values.count(list(card_value_set)[0]) == 2 and card_values.count(list(card_value_set)[1]) == 3):
+            first_card_count = card_values.count(list(card_value_set)[0])
+            last_card_count = card_values.count(list(card_value_set)[1])
+            three_two = first_card_count == 3 and last_card_count == 2
+            two_three = first_card_count == 2 and last_card_count == 3
+            if three_two or two_three:
                 return self.full_house()
         return self.pairs()
 
