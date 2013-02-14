@@ -106,9 +106,12 @@ class Test(unittest.TestCase):
         card_5 = Card(value='K', suit='S')
 
         cards = (card_1, card_2, card_3, card_4, card_5)
-        hand_1 = PokerHand(cards)
-        expected_hand = ('AS', '2H', '3C', 'QD', 'KS')
-        self.assertEqual(hand_1.show(), expected_hand)
+        hand = PokerHand(cards)
+        actual_cards = hand.show()
+        expected_cards = ['AS', '2H', '3C', 'QD', 'KS']
+        all_cards_expected = all(card in expected_cards for card in actual_cards)
+        self.assertTrue(all_cards_expected)
+        self.assertEqual(len(actual_cards), 5)
 
     def test_can_determine_card_value_index(self):
         card_1 = Card(value='A', suit='S')
@@ -198,7 +201,7 @@ class Test(unittest.TestCase):
         cards_2 = (card_6, card_7, card_8, card_9, card_10)
         hand_2 = PokerHand(cards_2)
         actual_rank_2 = hand_2.rank()
-        expected_rank_2 = ('Two Pair', ('7', 'J'))
+        expected_rank_2 = ('Two Pair', ('J', '7'))
         self.assertEqual(actual_rank_2, expected_rank_2)
 
     def test_can_determine_three_of_a_kind_from_hand(self):

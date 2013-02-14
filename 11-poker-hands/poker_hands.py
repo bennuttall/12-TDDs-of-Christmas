@@ -9,7 +9,7 @@ class PokerHand:
 
         if invalid_cards or duplicate_cards or len(cards) != 5:
             raise PokerHand.InvalidHandError
-        self.cards = cards
+        self.cards = self.sort_cards_by_value(cards)
 
     def show(self):
         return tuple(card.show() for card in self.cards)
@@ -23,7 +23,6 @@ class PokerHand:
         return straight if straight else self.high_card()
 
     def high_card(self):
-        self.sort_cards_by_value()
         hand_type = 'High Card'
         high_card = self.cards[0]
         return (hand_type, high_card.value)
@@ -47,14 +46,13 @@ class PokerHand:
         return (hand_types[n], repeated_value)
 
     def straight(self):
-        self.sort_cards_by_value()
         min_card, min_value_index = self.cards[4], self.cards[4].value_index
         max_card, max_value_index = self.cards[0], self.cards[0].value_index
         if min_value_index == max_value_index + 4:
             return ('Straight', max_card.value)
 
-    def sort_cards_by_value(self):
-        self.cards = sorted(self.cards, key=lambda card: card.value_index)
+    def sort_cards_by_value(self, cards):
+        return sorted(cards, key=lambda card: card.value_index)
 
     class InvalidHandError(Exception):
         pass
