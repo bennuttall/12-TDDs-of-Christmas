@@ -19,6 +19,9 @@ class PokerHand:
         unique_card_suits = len(card_suit_set)
         if unique_card_suits == 1:
             highest_card = self.cards[0]
+            straight = self.straight()
+            if straight:
+                return ('Straight Flush', highest_card.value)
             return ('Flush', highest_card.value)
 
         card_value_set = {card.value for card in self.cards}
