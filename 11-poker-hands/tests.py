@@ -1,4 +1,4 @@
-from poker_hands import PokerHand
+from poker_hand import PokerHand
 from card import Card
 import unittest
 
