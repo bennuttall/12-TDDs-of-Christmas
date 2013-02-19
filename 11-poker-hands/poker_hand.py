@@ -94,14 +94,3 @@ class PokerHand:
 
     class InvalidHandError(Exception):
         pass
-
-card_1 = Card(value='A', suit='S')
-card_2 = Card(value='2', suit='H')
-card_3 = Card(value='3', suit='C')
-card_4 = Card(value='Q', suit='D')
-card_5 = Card(value='K', suit='S')
-
-cards = (card_1, card_2, card_3, card_4, card_5)
-hand_1 = PokerHand(cards)
-
-print hand_1
