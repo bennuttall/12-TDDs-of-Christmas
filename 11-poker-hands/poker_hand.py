@@ -35,6 +35,10 @@ class PokerHand:
         other_hand, other_cards = other.rank()
         self_hand_value = PokerHand.hand_types.index(self_hand)
         other_hand_value = PokerHand.hand_types.index(other_hand)
+        if self_hand_value == other_hand_value:
+            if self_hand == other_hand:
+                return False
+            return self_hand > other_hand
         return self_hand_value > other_hand_value
 
     def show(self):
@@ -49,7 +53,7 @@ class PokerHand:
         card_suit_set = {card.suit for card in self.cards}
         unique_card_suits = len(card_suit_set)
         if unique_card_suits == 1:
-            highest_card = self.cards[0]
+            highest_card = self.cards[-1]
             straight = self.straight()
             if straight:
                 return ('Straight Flush', highest_card.value)
@@ -65,7 +69,7 @@ class PokerHand:
 
     def high_card(self):
         hand_type = 'High Card'
-        high_card = self.cards[0]
+        high_card = self.cards[-1]
         return (hand_type, high_card.value)
 
     def pairs(self):
@@ -73,7 +77,7 @@ class PokerHand:
         card_combinations = combinations(card_values, 2)
         repeated_values = [a for (a, b) in card_combinations if a == b]
         if len(repeated_values) == 2:
-            return ('Two Pairs', tuple(repeated_values))
+            return ('Two Pairs', tuple(reversed(repeated_values)))
         repeated_value = repeated_values[0]
         return self.which_n_of_a_kind(repeated_value)
 
@@ -88,8 +92,8 @@ class PokerHand:
         return (hand_types[n], repeated_value)
 
     def straight(self):
-        min_card, min_value_index = self.cards[4], self.cards[4].value_index
-        max_card, max_value_index = self.cards[0], self.cards[0].value_index
+        min_card, min_value_index = self.cards[0], self.cards[4].value_index
+        max_card, max_value_index = self.cards[4], self.cards[0].value_index
         if min_value_index == max_value_index + 4:
             return ('Straight', max_card.value)
 

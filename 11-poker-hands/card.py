@@ -1,5 +1,5 @@
 class Card:
-    values = ('A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2')
+    values = ('2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A')
     suits = ('H', 'D', 'S', 'C')
 
     def __init__(self, value, suit):

@@ -118,17 +118,17 @@ class Test(unittest.TestCase):
     def test_can_determine_card_value_index(self):
         card_1 = Card(value='A', suit='S')
         value_index_1 = card_1.value_index
-        expected_index_1 = 0
+        expected_index_1 = 12
         self.assertEqual(value_index_1, expected_index_1)
 
         card_2 = Card(value='5', suit='H')
         value_index_2 = card_2.value_index
-        expected_index_2 = 9
+        expected_index_2 = 3
         self.assertEqual(value_index_2, expected_index_2)
 
         card_3 = Card(value='J', suit='D')
         value_index_3 = card_3.value_index
-        expected_index_3 = 3
+        expected_index_3 = 9
         self.assertEqual(value_index_3, expected_index_3)
 
     def test_can_determine_high_card_from_hand(self):
@@ -378,15 +378,15 @@ class Test(unittest.TestCase):
         game_1 = PokerGame(hand_1, hand_2)
         self.assertIsInstance(game_1, PokerGame)
 
-    def test_can_determine_winner_between_pair_and_high_card(self):
+    def dtest_can_determine_winner_between_pair_and_high_card(self):
         card_1 = Card(value='2', suit='S')
         card_2 = Card(value='4', suit='H')
         card_3 = Card(value='6', suit='C')
         card_4 = Card(value='4', suit='D')
         card_5 = Card(value='7', suit='S')
 
-        cards = (card_1, card_2, card_3, card_4, card_5)
-        hand_1 = PokerHand(cards)
+        cards_1 = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards_1)
 
         card_6 = Card(value='3', suit='H')
         card_7 = Card(value='4', suit='C')
@@ -400,6 +400,29 @@ class Test(unittest.TestCase):
         game_1 = PokerGame(hand_1, hand_2)
         winner = game_1.winner()
         self.assertEqual(winner, 'Player 1 wins - Pair 4')
+
+    def test_can_determine_winner_over_two_high_card_hands(self):
+        card_1 = Card(value='2', suit='S')
+        card_2 = Card(value='3', suit='H')
+        card_3 = Card(value='6', suit='C')
+        card_4 = Card(value='7', suit='D')
+        card_5 = Card(value='9', suit='S')
+
+        cards_1 = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards_1)
+
+        card_6 = Card(value='3', suit='H')
+        card_7 = Card(value='4', suit='C')
+        card_8 = Card(value='5', suit='D')
+        card_9 = Card(value='9', suit='D')
+        card_10 = Card(value='T', suit='S')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+
+        game_1 = PokerGame(hand_1, hand_2)
+        winner = game_1.winner()
+        self.assertEqual(winner, 'Player 2 wins - High Card T')
 
 if __name__ == '__main__':
     unittest.main()
