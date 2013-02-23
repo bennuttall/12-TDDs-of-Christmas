@@ -13,14 +13,14 @@ class Card:
     def __repr__(self):
         return self.show()
 
-    def __eq__(self, card):
-        return self.value == card.value
+    def __eq__(self, other):
+        return self.value == other.value
 
-    def __lt__(self, card):
-        return Card.values.index(self.value) < Card.values.index(card.value)
+    def __lt__(self, other):
+        return Card.values.index(self.value) < Card.values.index(other.value)
 
-    def __gt__(self, card):
-        return Card.values.index(self.value) > Card.values.index(card.value)
+    def __gt__(self, other):
+        return Card.values.index(self.value) > Card.values.index(other.value)
 
     @staticmethod
     def validate_card_element(element, group):

@@ -378,5 +378,28 @@ class Test(unittest.TestCase):
         game_1 = PokerGame(hand_1, hand_2)
         self.assertIsInstance(game_1, PokerGame)
 
+    def test_can_determine_winner_between_pair_and_high_card(self):
+        card_1 = Card(value='2', suit='S')
+        card_2 = Card(value='4', suit='H')
+        card_3 = Card(value='6', suit='C')
+        card_4 = Card(value='4', suit='D')
+        card_5 = Card(value='7', suit='S')
+
+        cards = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards)
+
+        card_6 = Card(value='3', suit='H')
+        card_7 = Card(value='4', suit='C')
+        card_8 = Card(value='5', suit='D')
+        card_9 = Card(value='9', suit='D')
+        card_10 = Card(value='T', suit='S')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+
+        game_1 = PokerGame(hand_1, hand_2)
+        winner = game_1.winner()
+        self.assertEqual(winner, 'Player 1 wins - Pair 4')
+
 if __name__ == '__main__':
     unittest.main()

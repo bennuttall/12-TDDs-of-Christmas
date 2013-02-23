@@ -3,6 +3,18 @@ from card import Card
 
 
 class PokerHand:
+    hand_types = (
+        'High Card',
+        'Pair',
+        'Two Pairs',
+        'Three of a Kind',
+        'Straight',
+        'Flush',
+        'Full House',
+        'Four of a Kind',
+        'Straight Flush'
+    )
+
     def __init__(self, cards):
         invalid_cards = any(isinstance(card, Card) == False for card in cards)
         card_set = {repr(card) for card in cards}
@@ -18,8 +30,20 @@ class PokerHand:
     def __repr__(self):
         return str(self.show())
 
+    def __gt__(self, other):
+        self_hand, self_cards = self.rank()
+        other_hand, other_cards = other.rank()
+        self_hand_value = PokerHand.hand_types.index(self_hand)
+        other_hand_value = PokerHand.hand_types.index(other_hand)
+        return self_hand_value > other_hand_value
+
     def show(self):
         return tuple(card.show() for card in self.cards)
+
+    def hand_name(self):
+        rank, cards = self.rank()
+        cards = ' '.join(cards)
+        return '%s %s' % (rank, cards)
 
     def rank(self):
         card_suit_set = {card.suit for card in self.cards}
@@ -55,10 +79,10 @@ class PokerHand:
 
     def which_n_of_a_kind(self, repeated_value):
         hand_types = {
-                      2: 'Pair',
-                      3: 'Three of a Kind',
-                      4: 'Four of a Kind'
-                    }
+            2: 'Pair',
+            3: 'Three of a Kind',
+            4: 'Four of a Kind'
+        }
         card_values = [card.value for card in self.cards]
         n = card_values.count(repeated_value)
         return (hand_types[n], repeated_value)
