@@ -281,6 +281,31 @@ class Test(unittest.TestCase):
         expected_rank_2 = ('Straight', 'T')
         self.assertEqual(actual_rank_2, expected_rank_2)
 
+    def test_can_determine_straight_including_ace_from_hand(self):
+        card_1 = Card(value='T', suit='S')
+        card_2 = Card(value='J', suit='H')
+        card_3 = Card(value='Q', suit='C')
+        card_4 = Card(value='K', suit='D')
+        card_5 = Card(value='A', suit='H')
+
+        cards_1 = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards_1)
+        actual_rank_1 = hand_1.rank()
+        expected_rank_1 = ('Straight', 'A')
+        self.assertEqual(actual_rank_1, expected_rank_1)
+
+        card_6 = Card(value='A', suit='S')
+        card_7 = Card(value='2', suit='H')
+        card_8 = Card(value='3', suit='S')
+        card_9 = Card(value='4', suit='D')
+        card_10 = Card(value='5', suit='C')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+        actual_rank_2 = hand_2.rank()
+        expected_rank_2 = ('Straight', '5')
+        self.assertEqual(actual_rank_2, expected_rank_2)
+
     def test_can_determine_flush_from_hand(self):
         card_1 = Card(value='2', suit='D')
         card_2 = Card(value='4', suit='D')

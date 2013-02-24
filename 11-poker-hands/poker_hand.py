@@ -36,8 +36,6 @@ class PokerHand:
         self_hand_value = PokerHand.hand_types.index(self_hand)
         other_hand_value = PokerHand.hand_types.index(other_hand)
         if self_hand_value == other_hand_value:
-            if self_hand == other_hand:
-                return False
             return self_hand > other_hand
         return self_hand_value > other_hand_value
 
@@ -96,6 +94,9 @@ class PokerHand:
         max_card, max_value_index = self.cards[4], self.cards[0].value_index
         if min_value_index == max_value_index + 4:
             return ('Straight', max_card.value)
+        card_values_set = {card.value for card in self.cards}
+        if card_values_set == set(['A', '2', '3', '4', '5']):
+            return ('Straight', '5')
 
     def full_house(self):
         most_frequent_card = self.most_frequent_card()
