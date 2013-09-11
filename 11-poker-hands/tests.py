@@ -403,7 +403,7 @@ class Test(unittest.TestCase):
         game_1 = PokerGame(hand_1, hand_2)
         self.assertIsInstance(game_1, PokerGame)
 
-    def dtest_can_determine_winner_between_pair_and_high_card(self):
+    def test_can_determine_winner_between_pair_and_high_card(self):
         card_1 = Card(value='2', suit='S')
         card_2 = Card(value='4', suit='H')
         card_3 = Card(value='6', suit='C')
@@ -412,6 +412,7 @@ class Test(unittest.TestCase):
 
         cards_1 = (card_1, card_2, card_3, card_4, card_5)
         hand_1 = PokerHand(cards_1)
+        self.assertEqual(hand_1.hand_name(), 'Pair 4')
 
         card_6 = Card(value='3', suit='H')
         card_7 = Card(value='4', suit='C')
@@ -421,6 +422,7 @@ class Test(unittest.TestCase):
 
         cards_2 = (card_6, card_7, card_8, card_9, card_10)
         hand_2 = PokerHand(cards_2)
+        self.assertEqual(hand_2.hand_name(), 'High Card T')
 
         game_1 = PokerGame(hand_1, hand_2)
         winner = game_1.winner()
@@ -435,6 +437,7 @@ class Test(unittest.TestCase):
 
         cards_1 = (card_1, card_2, card_3, card_4, card_5)
         hand_1 = PokerHand(cards_1)
+        self.assertEqual(hand_1.hand_name(), 'High Card 9')
 
         card_6 = Card(value='3', suit='H')
         card_7 = Card(value='4', suit='C')
@@ -444,6 +447,7 @@ class Test(unittest.TestCase):
 
         cards_2 = (card_6, card_7, card_8, card_9, card_10)
         hand_2 = PokerHand(cards_2)
+        self.assertEqual(hand_2.hand_name(), 'High Card T')
 
         game_1 = PokerGame(hand_1, hand_2)
         winner = game_1.winner()
