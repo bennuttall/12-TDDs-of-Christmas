@@ -4,5 +4,5 @@ class PokerGame:
 
     def winner(self):
         winner = 1 if self.hands[0] > self.hands[1] else 2
-        winning_hand = sorted(self.hands)[-1]
+        winning_hand = sorted(self.hands).pop()
         return 'Player %s wins - %s' % (winner, winning_hand.hand_name())
