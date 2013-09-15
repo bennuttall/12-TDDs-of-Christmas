@@ -453,5 +453,30 @@ class Test(unittest.TestCase):
         winner = game_1.winner()
         self.assertEqual(winner, 'Player 2 wins - High Card T')
 
+    def test_can_determine_winner_over_two_high_card_hands_opposite_way(self):
+        card_1 = Card(value='2', suit='S')
+        card_2 = Card(value='3', suit='H')
+        card_3 = Card(value='6', suit='C')
+        card_4 = Card(value='7', suit='D')
+        card_5 = Card(value='T', suit='S')
+
+        cards_1 = (card_1, card_2, card_3, card_4, card_5)
+        hand_1 = PokerHand(cards_1)
+        self.assertEqual(hand_1.hand_name(), 'High Card T')
+
+        card_6 = Card(value='3', suit='H')
+        card_7 = Card(value='4', suit='C')
+        card_8 = Card(value='5', suit='D')
+        card_9 = Card(value='9', suit='D')
+        card_10 = Card(value='7', suit='S')
+
+        cards_2 = (card_6, card_7, card_8, card_9, card_10)
+        hand_2 = PokerHand(cards_2)
+        self.assertEqual(hand_2.hand_name(), 'High Card 9')
+
+        game_1 = PokerGame(hand_1, hand_2)
+        winner = game_1.winner()
+        self.assertEqual(winner, 'Player 1 wins - High Card T')
+
 if __name__ == '__main__':
     unittest.main()
