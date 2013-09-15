@@ -37,7 +37,8 @@ class PokerHand:
         other_hand_value = PokerHand.hand_types.index(other_hand)
         if self_hand_value == other_hand_value:
             return self_hand > other_hand
-        return self_hand_value > other_hand_value
+        else:
+            return self_hand_value > other_hand_value
 
     def show(self):
         return tuple(card.show() for card in self.cards)
@@ -55,15 +56,16 @@ class PokerHand:
             straight = self.straight()
             if straight:
                 return ('Straight Flush', highest_card.value)
-            return ('Flush', highest_card.value)
+            else:
+                return ('Flush', highest_card.value)
+        else:
+            card_value_set = {card.value for card in self.cards}
+            unique_card_values = len(card_value_set)
+            if unique_card_values < 5:
+                return self.repeats()
 
-        card_value_set = {card.value for card in self.cards}
-        unique_card_values = len(card_value_set)
-        if unique_card_values < 5:
-            return self.repeats()
-
-        straight = self.straight()
-        return straight if straight else self.high_card()
+            straight = self.straight()
+            return straight if straight else self.high_card()
 
     def high_card(self):
         hand_type = 'High Card'
@@ -76,8 +78,9 @@ class PokerHand:
         repeated_values = [a for (a, b) in card_combinations if a == b]
         if len(repeated_values) == 2:
             return ('Two Pairs', tuple(reversed(repeated_values)))
-        repeated_value = repeated_values[0]
-        return self.which_n_of_a_kind(repeated_value)
+        else:
+            repeated_value = repeated_values[0]
+            return self.which_n_of_a_kind(repeated_value)
 
     def which_n_of_a_kind(self, repeated_value):
         hand_types = {
@@ -94,9 +97,10 @@ class PokerHand:
         max_card, max_value_index = self.cards[4], self.cards[0].value_index
         if min_value_index == max_value_index + 4:
             return ('Straight', max_card.value)
-        card_values_set = {card.value for card in self.cards}
-        if card_values_set == set(['A', '2', '3', '4', '5']):
-            return ('Straight', '5')
+        else:
+            card_values_set = {card.value for card in self.cards}
+            if card_values_set == set(['A', '2', '3', '4', '5']):
+                return ('Straight', '5')
 
     def full_house(self):
         most_frequent_card = self.most_frequent_card()
