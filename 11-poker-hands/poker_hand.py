@@ -64,8 +64,9 @@ class PokerHand:
             if unique_card_values < 5:
                 return self.repeats()
 
-            straight = self.straight()
-            return straight if straight else self.high_card()
+            else:
+                straight = self.straight()
+                return straight if straight else self.high_card()
 
     def high_card(self):
         hand_type = 'High Card'
