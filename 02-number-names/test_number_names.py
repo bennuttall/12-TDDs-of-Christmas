@@ -7,6 +7,7 @@ def test_number_names():
     assert number_name(12) == 'twelve'
     assert number_name(15) == 'fifteen'
     assert number_name(16) == 'sixteen'
+    assert number_name(18) == 'eighteen'
     assert number_name(20) == 'twenty'
     assert number_name(21) == 'twenty one'
     assert number_name(55) == 'fifty five'
@@ -17,4 +18,3 @@ def test_number_names():
     assert number_name(12609) == 'twelve thousand, six hundred and nine'
     assert number_name(512607) == 'five hundred and twelve thousand, six hundred and seven'
     assert number_name(43112603) == 'forty three million, one hundred and twelve thousand, six hundred and three'
-    
